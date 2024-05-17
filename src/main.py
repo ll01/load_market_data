@@ -3,21 +3,18 @@
 downloads data from alphavantage with a rate limiter
 """
 
-from concurrent.futures import ProcessPoolExecutor
-from functools import partial
 import math
-from typing import Any, List, Tuple
-from tqdm import tqdm
 import os
+from concurrent.futures import ProcessPoolExecutor
+from typing import Any, List
+
 import tomllib
-
-
 from alphavantage import AlphaVantage
 from datasource import DataSource
 from db import open_database
 from etl import get_project_root
 from interval import Interval
-from session import CachedLimiterSession, generate_rate_limiter
+from tqdm import tqdm
 
 
 def load_data_source(config: dict[str, Any]) -> List[DataSource]:
@@ -45,6 +42,7 @@ def main():
         config = tomllib.load(f)
 
         test = config.get("test", False)
+        print(test)
         max_workers = config.get("max_workers", 1)
         database_name = config["database_name"]
     data_sources = load_data_source(config)

@@ -1,5 +1,4 @@
 from datetime import datetime
-from multiprocessing.managers import ValueProxy
 from typing import List
 
 import orjson
@@ -7,8 +6,6 @@ import orjson
 from datasource import DataSource
 from interval import Interval
 from candle import Candle
-from session import CachedLimiterSession
-# from session import CachedLimiterSession, SessionManager
 
 class AlphaVantage(DataSource):
     def __init__(
